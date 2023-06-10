@@ -1,0 +1,59 @@
+Email: contato@bancocn.com
+Tel: +835 66 7070, se nao der certo 70 de novo
+emprestimos@bancocn.com
+
+www.bancocn.com/admin
+
+// usa o whois para descobrir mais ips
+
+// ip da cloudFlare - waf00f - ve se tem firewall
+bancocn.com has address 172.67.192.199
+bancocn.com has address 104.21.52.8
+
+// subdominios
+shop.bancocn.com.
+172.18.100.7                               
+
+www.bancocn.com.
+172.67.192.199
+
+www.bancocn.com.
+104.21.52.8
+
+// usando sudo nmap
+PORT     STATE SERVICE
+80/tcp   open  http
+443/tcp  open  https
+8080/tcp open  http-proxy
+8443/tcp open  https-alt
+
+// usando o sudo -O nmap para pegar o sistema opreracional
+Device type: bridge|general purpose|switch
+Running (JUST GUESSING): Oracle Virtualbox (98%), QEMU (93%), Bay Networks embedded (88%)
+
+// serviços totais
+PORT     STATE SERVICE       VERSION
+80/tcp   open  http          Cloudflare http proxy
+|_http-title: Did not follow redirect to http://www.bancocn.com/
+|_http-server-header: cloudflare
+443/tcp  open  ssl/https     cloudflare
+|_http-title: 400 The plain HTTP request was sent to HTTPS port
+|_http-server-header: cloudflare
+8080/tcp open  http          Cloudflare http proxy
+|_http-title: Did not follow redirect to http://www.bancocn.com/
+|_http-server-header: cloudflare
+8443/tcp open  ssl/https-alt cloudflare
+|_http-title: 400 The plain HTTP request was sent to HTTPS port
+|_http-server-header: cloudflare
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: bridge|general purpose|switch
+Running (JUST GUESSING): Oracle Virtualbox (98%), QEMU (93%), Bay Networks embedded (88%)
+OS CPE: cpe:/o:oracle:virtualbox cpe:/a:qemu:qemu cpe:/h:baynetworks:baystack_450
+Aggressive OS guesses: Oracle Virtualbox (98%), QEMU user mode network gateway (93%), Bay Networks BayStack 450 switch (software version 3.1.0.22) (88%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+Information Disclorsure
+Apache/2.4.29 (Ubuntu) Server at www.bancocn.com Port 80
+
+Directory: http://www.bancocn.com/assets
