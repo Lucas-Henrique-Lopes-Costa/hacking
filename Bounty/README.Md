@@ -84,3 +84,55 @@ Fazendo download de todos os arquivos necessários.
 
 ###### Protocolo de acesso a mensagens da internet
 
+## HTTP
+
+Protocolo de transferência de hipertexto
+
+### Dois momentos
+
+#### Request
+
+É o momento que o cliente faz uma requisição ao servidor.
+
+##### Requisição
+
+É quando verifica se tem permissão, se tem arquivos necessários para montar a visualização. E se tiver, ele responde com os arquivos necessários.
+
+POST - Envia dados para o servidor
+
+GET - Pega dados do servidor
+
+PUT - Atualiza dados do servidor
+
+DELETE - Deleta dados do servidor
+
+#### Response
+
+É o momento que o servidor responde ao cliente.
+
+##### Status Code
+
+Começam com 1 - Informação
+
+Começam com 2 - Sucesso
+
+Começam com 3 - Redirecionamento
+
+Começam com 4 - Erro do cliente
+
+Começam com 5 - Erro do servidor
+
+##### Headers
+
+São informações adicionais que o servidor envia para o cliente.
+
+Body: É o corpo da resposta, onde vem os dados que o servidor envia para o cliente.
+
+## O que é Proxy?
+
+É um intermediário entre o cliente e o servidor.
+
+Podemos usar para fazer cache, para bloquear sites, para fazer auditoria, para fazer controle de acesso.
+
+Com a proxy, podemos modificar as requisições ou bloquear. Podendo analisar
+
