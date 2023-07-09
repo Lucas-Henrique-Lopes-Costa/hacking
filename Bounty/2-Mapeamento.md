@@ -24,9 +24,9 @@ Superfície = Funcionalidades
 
 ## Nosso Workflow
 
-### Dominios
+### Domínios
 
-### Subdominios
+### Subdomínios
 
 ### Blocos de IP
 
