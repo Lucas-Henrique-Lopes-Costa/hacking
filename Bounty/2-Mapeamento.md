@@ -4,15 +4,15 @@ Toda vulnerabilidade que a gente pode explorar
 
 ## Tipos de Bug
 
-- [ ] XSS - Cross Site Scripting
+- XSS - Cross Site Scripting
 
-- [ ] SQL Injection - Injeção de SQL
+- SQL Injection - Injeção de SQL
 
-- [ ] CSRF - Cross Site Request Forgery
+- CSRF - Cross Site Request Forgery
 
-- [ ] SSRF - Server Side Request Forgery
+- SSRF - Server Side Request Forgery
 
-- [ ] RCE - Remote Code Execution
+- RCE - Remote Code Execution
 
 # Reconhecimento de Bug
 
