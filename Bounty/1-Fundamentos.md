@@ -10,23 +10,21 @@ Aulas do curso da Pato Academy
 
 ##### Todos que consomem o serviço do servidor
 
-#### Servidor: Onde está o serviço
+#### Servidor
 
-O cliente faz uma requisição ao servidor e o servidor responde com uma resposta.
+##### Onde está o serviço
 
-E o servidor responde os dados necessários para montar aquela visualização.
-
-Fazendo download de todos os arquivos necessários.
+###### O cliente faz uma requisição ao servidor e o servidor responde com uma resposta. E o servidor responde os dados necessários para montar aquela visualização. Fazendo download de todos os arquivos necessários
 
 ## Testes
 
 ### Black Box
 
-#### Não sabe como funciona por dentro, só sabe o que entra e o que sai.
+#### Não sabe como funciona por dentro, só sabe o que entra e o que sai
 
 ### SWT
 
-#### Testa o que está dentro da caixa, o que está dentro do código. Chamado de teste de caixa transparente.
+#### Testa o que está dentro da caixa, o que está dentro do código. Chamado de teste de caixa transparente
 
 ## Protocolos
 
@@ -37,8 +35,6 @@ Fazendo download de todos os arquivos necessários.
 ##### HyperText Transfer Protocol
 
 ###### Protocolo de transferência de hipertexto
-
-
 
 #### HTTPS
 
@@ -86,129 +82,114 @@ Fazendo download de todos os arquivos necessários.
 
 ## HTTP
 
-Protocolo de transferência de hipertexto
+### Protocolo de transferência de hipertexto
 
-### Dois momentos
+#### Dois momentos
 
-#### Request
+##### Request
 
-É o momento que o cliente faz uma requisição ao servidor.
+###### É o momento que o cliente faz uma requisição ao servidor
 
 ##### Requisição
 
-É quando verifica se tem permissão, se tem arquivos necessários para montar a visualização. E se tiver, ele responde com os arquivos necessários.
+###### É quando verifica se tem permissão, se tem arquivos necessários para montar a visualização. E se tiver, ele responde com os arquivos necessários
 
-POST - Envia dados para o servidor
+#### Métodos
 
-GET - Pega dados do servidor
+##### POST - Envia dados para o servidor
 
-PUT - Atualiza dados do servidor
+##### GET - Pega dados do servidor
 
-DELETE - Deleta dados do servidor
+##### PUT - Atualiza dados do servidor
+
+##### DELETE - Deleta dados do servidor
 
 #### Response
 
-É o momento que o servidor responde ao cliente.
+##### É o momento que o servidor responde ao cliente
 
 ##### Status Code
 
-Começam com 1 - Informação
+###### Começam com 1 - Informação
 
-Começam com 2 - Sucesso
+###### Começam com 2 - Sucesso
 
-Começam com 3 - Redirecionamento
+###### Começam com 3 - Redirecionamento
 
-Começam com 4 - Erro do cliente
+###### Começam com 4 - Erro do cliente
 
-Começam com 5 - Erro do servidor
+###### Começam com 5 - Erro do servidor
 
 ##### Headers
 
-São informações adicionais que o servidor envia para o cliente.
+###### São informações adicionais que o servidor envia para o cliente
 
-Body: É o corpo da resposta, onde vem os dados que o servidor envia para o cliente.
+###### Body: É o corpo da resposta, onde vem os dados que o servidor envia para o cliente
 
 ## O que é Proxy?
 
-É um intermediário entre o cliente e o servidor.
-
-Podemos usar para fazer cache, para bloquear sites, para fazer auditoria, para fazer controle de acesso.
-
-Com a proxy, podemos modificar as requisições ou bloquear. Podendo analisar
+### É um intermediário entre o cliente e o servidor. Podemos usar para fazer cache, para bloquear sites, para fazer auditoria, para fazer controle de acesso. Com a proxy, podemos modificar as requisições ou bloquear. Podendo analisar
 
 ## URL
 
-Uniform Resource Locator
+### Uniform Resource Locator
 
-É um padrão para poder acessar esse recurso na internet
+#### É um padrão para poder acessar esse recurso na internet
 
 ### Estrutura
 
 #### Protocolo ou Schema
 
-Geralmente é o HTTP ou HTTPS
+##### Geralmente é o HTTP ou HTTPS
 
 #### Host
 
-É o endereço do servidor
+##### É o endereço do servidor
 <www.google.com.br>
 
-www - subdomínio
+##### Tipos
 
-google - domínio
+###### www - subdomínio
 
-com - domínio de primeiro nível
+##### google - domínio
 
-br - domínio de segundo nível
+##### com - domínio de primeiro nível
+
+##### br - domínio de segundo nível
 
 #### Porta
 
-Não é obrigatório, mas se não tiver, ele vai usar a porta padrão do protocolo
-
-Por exemplo, se for HTTP, ele vai usar a porta 80
-E para HTTPS, ele vai usar a porta 443
+##### Não é obrigatório, mas se não tiver, ele vai usar a porta padrão do protocolo. Por exemplo, se for HTTP, ele vai usar a porta 80. E para HTTPS, ele vai usar a porta 443
 
 #### Caminho
 
-Onde está o recurso que queremos acessar
+##### Onde está o recurso que queremos acessar
 
 #### Query (parâmetros)
 
-Ele é opcional, mas se tiver, ele vai começar com uma interrogação
-
-E os parâmetros são separados por um &
+##### Ele é opcional, mas se tiver, ele vai começar com uma interrogação. E os parâmetros são separados por um &
 
 #### Fragmento
 
-Anchors ou Hash
+##### Anchors ou Hash
 
-Ele vem para ajudar a localizar um elemento dentro da página
+##### Ele vem para ajudar a localizar um elemento dentro da página. No HTTP ele não é enviado para o servidor, ele é usado apenas no cliente
 
-No HTTP ele não é enviado para o servidor, ele é usado apenas no cliente
+## O HTTP Authentication
 
-## O HTTP Authentification
-
-É um protocolo de autenticação
+### É um protocolo de autenticação
 
 ### Basic
 
-É o mais simples, mas não é o mais seguro
-
-Ele envia o usuário e a senha em texto puro
-
-<HTTPS://USUARIO:SENHA@URL>
+#### É o mais simples, mas não é o mais seguro. Ele envia o usuário e a senha em texto puro <HTTPS://USUARIO:SENHA@URL>
 
 ## Form
 
-É um elemento HTML que serve para enviar dados para o servidor
+### É um elemento HTML que serve para enviar dados para o servidor Application/x-www-form-urlencoded
 
-Applicaton/x-www-form-urlencoded
+#### nome=Lucas&nick=lucashlc
 
-nome=Lucas&nick=lucashlc
-
-Essa linguagem utilizam o URL code, que é um padrão para poder enviar dados pela URL
-
-Utilizam o padrão ASCII
+##### Essa linguagem utilizam o URL code, que é um padrão para poder enviar dados pela URL. Utilizam o padrão ASCII
 
 ## Montagem de Página
 
@@ -224,7 +205,7 @@ E depois ele vai pegar apenas os dados, porque a estrutura ele já sabe o que te
 
 ### API
 
-Ela facilita uma comunicão entre dois sistemas, sem precisar de uma interface gráfica
+Ela facilita uma comunicação entre dois sistemas, sem precisar de uma interface gráfica
 
 E o backend se tornou um api que vai enviar os dados para o frontend
 
