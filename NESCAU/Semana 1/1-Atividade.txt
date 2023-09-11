@@ -1,0 +1,13 @@
+Desafio Linux da independência
+
+Logar no google;
+Acessar a página: https://www.youtube.com/feed/channels
+Baixar o código: view-source:https://www.youtube.com/feed/channels
+Realizar uma filtragem dos dados utilizando comandos Bultin do Linux 
+no terminal para que a saída seja uma lista de links dos canais inscritos.
+
+Ex:
+https://www.youtube.com/@uflabr
+https://www.youtube.com/@OFJAAAH
+https://www.youtube.com/@intigriti
+https://www.youtube.com/@joukim

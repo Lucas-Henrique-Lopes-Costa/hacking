@@ -58,6 +58,12 @@ hot -t ns <domínio>
 
 ##### <https://crt.sh>
 
+#### Consultando com base no Archive
+
+##### <https://web.archive.org/cdx/search/cdx?url=*.nomademilionario.com/*&output=txt&fl=original&collapse=urlkey>
+
+###### Para limpar usamos o site: <https://urltodomain.com/>
+
 ### Blocos de IP
 
 ### Servidores WEB
