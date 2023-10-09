@@ -6,17 +6,17 @@ Depois no terminal rode o comando:
 grep -o 'href="/@[a-zA-Z0-9_\-]*"' channels.html | sed 's/href="//;s/"//' | sort | uniq | awk '{print "https://www.youtube.com"$1}' > channels_links.txt
 ```
 
-1. grep -o 'href="/@[a-zA-Z0-9_\-]*"' channels.html: Este comando procura todas as ocorrências de href="/@..." no arquivo channels.html.
+1. `grep -o 'href="/@[a-zA-Z0-9_\-]*"' channels.html`: Este comando procura todas as ocorrências de href="/@..." no arquivo channels.html.
 
-2. sed 's/href="//;s/"//': Remove o prefixo href=" e o sufixo " para obter apenas o valor do atributo href.
+2. `sed 's/href="//;s/"//'`: Remove o prefixo href=" e o sufixo " para obter apenas o valor do atributo href.
 
-3. sort: Ordena as linhas.
+3. `sort`: Ordena as linhas.
 
-4. uniq: Remove as linhas duplicadas.
+4. `uniq`: Remove as linhas duplicadas.
 
-5. awk '{print "https://www.youtube.com"$0}': Adiciona o prefixo "https://www.youtube.com" a cada linha.
+5. `awk '{print "https://www.youtube.com"$0}'`: Adiciona o prefixo "https://www.youtube.com" a cada linha.
 
-6. '> channels_links.txt': Redireciona a saída para o arquivo channels_links.txt.
+6. `> channels_links.txt`: Redireciona a saída para o arquivo channels_links.txt.
 
 ---
 
