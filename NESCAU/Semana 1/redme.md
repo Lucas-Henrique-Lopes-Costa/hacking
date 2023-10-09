@@ -20,7 +20,7 @@ grep -o 'href="/@[a-zA-Z0-9_\-]*"' channels.html | sed 's/href="//;s/"//' | sort
 
 ---
 
-### Exmplicação detalhada do awk
+### Explicação detalhada do awk
 
 No contexto do `awk`, \( \$0 \) refere-se ao registro atual, representa a linha inteira que está sendo processada no momento.
 
