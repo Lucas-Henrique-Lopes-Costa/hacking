@@ -1,0 +1,9 @@
+Atividade 04
+
+Criar um script de automação de instalação das ferramentas:
+Go Language
+VScode
+pip3 do python
+Assetfinder
+
+Dica: Lembrar das técnicas utilizadas nas atividades anteriores de busca no código para obter a versão mais recente e compatível.

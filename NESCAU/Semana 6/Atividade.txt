@@ -1,0 +1,16 @@
+# Aula 06 - 16/10/2023
+
+# https://github.com/hakluke/haktrails
+
+go install -v github.com/hakluke/haktrails@latest
+
+# https://github.com/projectdiscovery/chaos-client
+# https://chaos.projectdiscovery.io/
+
+go install -v github.com/projectdiscovery/chaos-client/cmd/chaos@latest
+
+# https://crt.sh/
+
+# https://github.com/gwen001/github-subdomains
+
+go install github.com/gwen001/github-subdomains@latest
